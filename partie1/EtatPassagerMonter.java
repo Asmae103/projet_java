@@ -6,13 +6,14 @@ package etatPassager;
  *  
  * Les instances de cette classe sont des objets constants.
  **/
-public class EtatPassager {
+public class EtatPassagerMonter {
+
   /**
    * Définit les trois états possible d'un passager dans un transport.
    */
   public enum Etat {/** passager assis à l'intérieur */  ASSIS, 
                     /** passager debout à l'intérieur */ DEBOUT,  
-                    /** passager à l'extérieur */        DEHORS};
+                    /** passager à l'extérieur       DEHORS}; */ 
 
   private final Etat monEtat;
 
@@ -63,7 +64,7 @@ public class EtatPassager {
    * @return vrai si instanciation avec ASSIS ou DEBOUT.
    */
   public boolean estInterieur() {
-    return monEtat == Etat.ASSIS || monEtat.DEBOUT ;
+    return monEtat == Etat.ASSIS || Etat.DEBOUT ;
   }
 
 
