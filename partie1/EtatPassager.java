@@ -6,6 +6,7 @@ package etatPassager;
  *  
  * Les instances de cette classe sont des objets constants.
  **/
+
 public class EtatPassager {
   /**
    * Définit les trois états possible d'un passager dans un transport.
