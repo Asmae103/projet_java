@@ -1,234 +1,515 @@
 # Plan de Travail pour Équipe de 3 Personnes - Projet Transports En Commun
 
-## Répartition des Rôles
+## Répartition des Tâches de Codage
 
-### Personne 1 : Chef de Projet / Intégrateur
-- Responsable de la coordination globale
-- Gestion de l'intégration des différentes parties
-- Tests d'intégration et validation finale
-- Documentation et rapports
+### Personne 1 : Développeur Classes de Base et Tests
+- **Classes à coder** : EtatPassager, JaugeNaturel, UsagerInvalideException
+- **Tests à coder** : EtatPassagerTest, JaugeNaturelTest
+- **Intégration** : Simple.java et tests d'intégration
 
-### Personne 2 : Développeur Backend - Gestion des Passagers
-- Implémentation des classes liées aux passagers
-- Gestion des états et comportements des usagers
-- Tests unitaires pour les classes de passagers
+### Personne 2 : Développeur Passager et Comportements
+- **Classes à coder** : PassagerStandard
+- **Interfaces à implémenter** : Usager, Passager
+- **Tests à coder** : PassagerStandardTest
 
-### Personne 3 : Développeur Backend - Gestion du Transport
-- Implémentation des classes liées au transport
-- Gestion des places et déplacements
-- Tests unitaires pour les classes de transport
+### Personne 3 : Développeur Transport et Gestion
+- **Classes à coder** : Autobus
+- **Interfaces à implémenter** : Transport, Bus
+- **Tests à coder** : AutobusTest
 
-## Phase 1 : Initialisation (Jour 1)
+## Phase 1 : Classes de Base (Jour 1)
 
-### Tâches Communes (Toute l'équipe - 2 heures)
-- [ ] Lecture et compréhension du cahier des charges
-- [ ] Installation et configuration de l'environnement Eclipse
-- [ ] Création du projet partagé (Git/SVN)
-- [ ] Répartition formelle des tâches et planning détaillé
+### Personne 1 : Classes de Support
+```java
+// À coder : EtatPassager.java
+package tec;
 
-### Personne 1 : Chef de Projet
-- [ ] Création du dépôt Git et configuration
-- [ ] Mise en place du structure de branches (master, develop, feature/*)
-- [ ] Configuration des outils de communication (Slack/Discord)
-- [ ] Création du tableau de suivi (Trello/GitHub Projects)
+class EtatPassager {
+    private static final int DEHORS = 0;
+    private static final int ASSIS  = 1;
+    private static final int DEBOUT = 2;
+    private int etat;
+    
+    public EtatPassager() {
+        this.etat = DEHORS;
+    }
+    
+    public boolean estAssis() { return etat == ASSIS; }
+    public boolean estDebout() { return etat == DEBOUT; }
+    public boolean estDehors() { return etat == DEHORS; }
+    public void assis() { etat = ASSIS; }
+    public void debout() { etat = DEBOUT; }
+    public void dehors() { etat = DEHORS; }
+}
+```
 
-### Personne 2 : Gestion des Passagers
-- [ ] Analyse détaillée des interfaces Usager et Passager
-- [ ] Création du squelette de la classe PassagerStandard
-- [ ] Implémentation de la classe EtatPassager
-- [ ] Premiers tests unitaires pour EtatPassager
+### Personne 2 : Squelette PassagerStandard
+```java
+// À coder : PassagerStandard.java (version minimale)
+package tec;
 
-### Personne 3 : Gestion du Transport
-- [ ] Analyse détaillée des interfaces Transport et Bus
-- [ ] Création du squelette de la classe Autobus
-- [ ] Implémentation de la classe JaugeNaturel
-- [ ] Premiers tests unitaires pour JaugeNaturel
+public class PassagerStandard implements Usager, Passager {
+    private String nom;
+    private int destination;
+    private EtatPassager etat;
+    
+    public PassagerStandard(String nom, int destination) {
+        this.nom = nom;
+        this.destination = destination;
+        this.etat = new EtatPassager();
+    }
+    
+    @Override
+    public String nom() { return nom; }
+    
+    @Override
+    public void monterDans(Transport t) throws UsagerInvalideException {
+        // TODO : À implémenter phase 2
+    }
+    
+    @Override
+    public boolean estDehors() { return etat.estDehors(); }
+    @Override
+    public boolean estAssis() { return etat.estAssis(); }
+    @Override
+    public boolean estDebout() { return etat.estDebout(); }
+    
+    @Override
+    public void accepterSortie() { etat.dehors(); }
+    @Override
+    public void accepterPlaceAssise() { etat.assis(); }
+    @Override
+    public void accepterPlaceDebout() { etat.debout(); }
+    
+    @Override
+    public void nouvelArret(Bus bus, int numeroArret) {
+        // TODO : À implémenter phase 2
+    }
+}
+```
 
-## Phase 2 : Développement Initial (Jour 2-3)
+### Personne 3 : Squelette Autobus
+```java
+// À coder : Autobus.java (version minimale)
+package tec;
 
-### Personne 1 : Chef de Projet
-- [ ] Intégration des classes de support dans le projet
-- [ ] Mise en place de la classe Simple pour tests d'intégration
-- [ ] Configuration de l'environnement de test continu
-- [ ] Documentation de l'architecture
+public class Autobus implements Transport, Bus {
+    private JaugeNaturel assises;
+    private JaugeNaturel debouts;
+    
+    public Autobus(int nbPlaceAssise, int nbPlaceDebout) {
+        this.assises = new JaugeNaturel(nbPlaceAssise, 0);
+        this.debouts = new JaugeNaturel(nbPlaceDebout, 0);
+    }
+    
+    @Override
+    public void allerArretSuivant() throws UsagerInvalideException {
+        // TODO : À implémenter phase 2
+    }
+    
+    @Override
+    public boolean aPlaceAssise() { return assises.estVert(); }
+    @Override
+    public boolean aPlaceDebout() { return debouts.estVert(); }
+    
+    @Override
+    public void demanderPlaceAssise(Passager p) {
+        // TODO : À implémenter phase 2
+    }
+    
+    @Override
+    public void demanderPlaceDebout(Passager p) {
+        // TODO : À implémenter phase 2
+    }
+    
+    @Override
+    public void demanderChangerEnDebout(Passager p) {
+        // TODO : À implémenter phase 2
+    }
+    
+    @Override
+    public void demanderChangerEnAssis(Passager p) {
+        // TODO : À implémenter phase 2
+    }
+    
+    @Override
+    public void demanderSortie(Passager p) {
+        // TODO : À implémenter phase 2
+    }
+}
+```
 
-### Personne 2 : Gestion des Passagers
-- [ ] Implémentation complète des méthodes d'état dans PassagerStandard
-  - [ ] estAssis(), estDebout(), estDehors(), non()
-- [ ] Implémentation des modificateurs d'état
-  - [ ] accepterPlaceAssise(), accepterPlaceDebout(), accepterSortie()
-- [ ] Tests unitaires pour toutes les méthodes d'état
-- [ ] Code review des modifications
+## Phase 2 : Implémentation Complète (Jour 2-3)
 
-### Personne 3 : Gestion du Transport
-- [ ] Implémentation des méthodes d'état dans Autobus
-  - [ ] aPlaceAssise(), aPlaceDebout()
-- [ ] Implémentation des gestionnaires de places
-  - [ ] demanderPlaceAssise(), demanderPlaceDebout()
-- [ ] Tests unitaires pour les méthodes d'état
-- [ ] Code review des modifications
+### Personne 1 : JaugeNaturel et Tests
+```java
+// À compléter : JaugeNaturel.java
+package tec;
 
-## Phase 3 : Développement Avancé (Jour 4-5)
+class JaugeNaturel {
+    private long maximum;
+    private long valeur;
+    
+    public JaugeNaturel(long max, long vigie) {
+        this.maximum = max;
+        this.valeur = vigie;
+    }
+    
+    public boolean estRouge() { return valeur > maximum; }
+    public boolean estVert() { return valeur <= maximum; }
+    public boolean estBleu() { return valeur < 0; }
+    
+    public void incrementer() { valeur++; }
+    public void decrementer() { valeur--; }
+    
+    public Long getValeur() { return valeur; }
+    public Long getMax() { return maximum; }
+}
 
-### Personne 1 : Chef de Projet
-- [ ] Premier test d'intégration avec Simple.java
-- [ ] Identification des problèmes d'interaction
-- [ ] Coordination des corrections entre les développeurs
-- [ ] Mise à jour de la documentation
+// À coder : JaugeNaturelTest.java
+package tec;
 
-### Personne 2 : Gestion des Passagers
-- [ ] Implémentation de la logique de montée dans PassagerStandard
-  - [ ] monterDans(Transport t)
-- [ ] Implémentation de la logique d'arrêt
-  - [ ] nouvelArret(Bus bus, int numeroArret)
-- [ ] Tests unitaires pour les méthodes de comportement
-- [ ] Correction des bugs identifiés lors de l'intégration
+public class JaugeNaturelTest {
+    public static void main(String[] args) {
+        testCreation();
+        testIncrementation();
+        testDecrementation();
+        testLimites();
+    }
+    
+    private static void testCreation() {
+        JaugeNaturel jauge = new JaugeNaturel(100, 50);
+        assert jauge.getValeur() == 50;
+        assert jauge.getMax() == 100;
+        System.out.println("Test création : OK");
+    }
+    
+    // ... autres méthodes de test
+}
+```
 
-### Personne 3 : Gestion du Transport
-- [ ] Implémentation des changements de place
-  - [ ] demanderChangerEnAssis(), demanderChangerEnDebout()
-- [ ] Implémentation de la sortie des passagers
-  - [ ] demanderSortie(Passager p)
-- [ ] Implémentation du déplacement entre arrêts
-  - [ ] allerArretSuivant()
-- [ ] Tests unitaires pour toutes les méthodes de gestion
+### Personne 2 : Logique PassagerStandard
+```java
+// À compléter dans PassagerStandard.java
+@Override
+public void monterDans(Transport t) throws UsagerInvalideException {
+    Bus b = (Bus) t;
+    if (b.aPlaceAssise()) {
+        b.demanderPlaceAssise(this);
+    } else if (b.aPlaceDebout()) {
+        b.demanderPlaceDebout(this);
+    }
+    // Sinon, le passager reste dehors
+}
 
-## Phase 4 : Intégration et Tests (Jour 6-7)
+@Override
+public void nouvelArret(Bus bus, int numeroArret) {
+    if (numeroArret == destination) {
+        bus.demanderSortie(this);
+    }
+}
 
-### Tâches Communes (Toute l'équipe - 4 heures)
-- [ ] Fusion de toutes les branches de développement
-- [ ] Résolution des conflits d'intégration
-- [ ] Tests d'intégration complets avec Simple.java
-- [ ] Correction des bugs rémanents
+@Override
+public String toString() {
+    return nom + " " + (estAssis() ? "assis" : (estDebout() ? "debout" : "dehors"));
+}
 
-### Personne 1 : Chef de Projet
-- [ ] Coordination de l'intégration finale
-- [ ] Tests de régression complets
-- [ ] Validation du résultat attendu
-- [ ] Préparation de la documentation finale
+// À coder : PassagerStandardTest.java
+package tec;
 
-### Personne 2 : Gestion des Passagers
-- [ ] Tests unitaires complets pour PassagerStandard
-- [ ] Tests de cas limites (passagers multiples, destinations variées)
-- [ ] Correction des bugs liés aux passagers
-- [ ] Documentation des classes de passagers
+public class PassagerStandardTest {
+    public static void main(String[] args) {
+        testCreation();
+        testEtats();
+        testMonterDans();
+        testNouvelArret();
+    }
+    
+    private static void testCreation() {
+        PassagerStandard p = new PassagerStandard("Test", 5);
+        assert p.nom().equals("Test");
+        assert p.estDehors();
+        System.out.println("Test création passager : OK");
+    }
+    
+    // ... autres méthodes de test
+}
+```
 
-### Personne 3 : Gestion du Transport
-- [ ] Tests unitaires complets pour Autobus
-- [ ] Tests de cas limites (capacité maximale, arrêts multiples)
-- [ ] Correction des bugs liés au transport
-- [ ] Documentation des classes de transport
+### Personne 3 : Logique Autobus
+```java
+// À compléter dans Autobus.java
+private Passager[] passagers;
+private int nbPassagers;
+private int numeroArret;
 
-## Phase 5 : Finalisation (Jour 8)
+public Autobus(int nbPlaceAssise, int nbPlaceDebout) {
+    this.assises = new JaugeNaturel(nbPlaceAssise, 0);
+    this.debouts = new JaugeNaturel(nbPlaceDebout, 0);
+    this.passagers = new Passager[nbPlaceAssise + nbPlaceDebout];
+    this.nbPassagers = 0;
+    this.numeroArret = 1;
+}
 
-### Tâches Communes (Toute l'équipe - 2 heures)
-- [ ] Revue de code finale
-- [ ] Tests d'acceptation complets
-- [ ] Finalisation de la documentation
-- [ ] Préparation de la présentation
+@Override
+public void allerArretSuivant() throws UsagerInvalideException {
+    numeroArret++;
+    for (int i = 0; i < nbPassagers; i++) {
+        passagers[i].nouvelArret(this, numeroArret);
+    }
+}
 
-### Personne 1 : Chef de Projet
-- [ ] Compilation de la documentation finale
-- [ ] Préparation du rapport de projet
-- [ ] Vérification de la conformité avec les spécifications
-- [ ] Archivage du projet final
+@Override
+public void demanderPlaceAssise(Passager p) {
+    if (aPlaceAssise() && p.estDehors()) {
+        passagers[nbPassagers++] = p;
+        assises.incrementer();
+        p.accepterPlaceAssise();
+    }
+}
 
-### Personne 2 : Gestion des Passagers
-- [ ] Finalisation des tests unitaires
-- [ ] Documentation Javadoc complète pour les classes de passagers
-- [ ] Vérification de la couverture de code
-- [ ] Optimisation des performances si nécessaire
+@Override
+public void demanderPlaceDebout(Passager p) {
+    if (aPlaceDebout() && p.estDehors()) {
+        passagers[nbPassagers++] = p;
+        debouts.incrementer();
+        p.accepterPlaceDebout();
+    }
+}
 
-### Personne 3 : Gestion du Transport
-- [ ] Finalisation des tests unitaires
-- [ ] Documentation Javadoc complète pour les classes de transport
-- [ ] Vérification de la couverture de code
-- [ ] Optimisation des performances si nécessaire
+@Override
+public void demanderSortie(Passager p) {
+    for (int i = 0; i < nbPassagers; i++) {
+        if (passagers[i] == p) {
+            for (int j = i; j < nbPassagers - 1; j++) {
+                passagers[j] = passagers[j + 1];
+            }
+            passagers[--nbPassagers] = null;
+            
+            if (p.estAssis()) {
+                assises.decrementer();
+            } else if (p.estDebout()) {
+                debouts.decrementer();
+            }
+            p.accepterSortie();
+            break;
+        }
+    }
+}
 
-## Plan de Travail Quotidien
+@Override
+public String toString() {
+    return "[arret:" + numeroArret + ", assis:" + assises.getValeur() + 
+           ", debout:" + debouts.getValeur() + "]";
+}
+
+// À coder : AutobusTest.java
+package tec;
+
+public class AutobusTest {
+    public static void main(String[] args) {
+        testCreation();
+        testPlaces();
+        testGestionPassagers();
+        testAllerArretSuivant();
+    }
+    
+    private static void testCreation() {
+        Autobus bus = new Autobus(5, 10);
+        assert bus.aPlaceAssise();
+        assert bus.aPlaceDebout();
+        System.out.println("Test création autobus : OK");
+    }
+    
+    // ... autres méthodes de test
+}
+```
+
+## Phase 3 : Tests d'Intégration (Jour 4)
+
+### Personne 1 : Intégration et Debug
+```java
+// À vérifier et compléter : Simple.java
+import tec.Usager;
+import tec.Transport;
+import tec.UsagerInvalideException;
+import tec.PassagerStandard;
+import tec.Autobus;
+
+class Simple {
+    static private void deboguerEtat(Transport t, Usager p) {
+        System.out.println(p);
+        System.out.println(t);
+    }
+
+    static public void main(String[] args) throws UsagerInvalideException {
+        Transport serenity = new Autobus(1, 2);
+        Usager kaylee = new PassagerStandard("Kaylee", 5);
+
+        serenity.allerArretSuivant();
+        System.out.println(serenity);
+
+        kaylee.monterDans(serenity);
+
+        Usager jayne = new PassagerStandard("Jayne", 4);
+        jayne.monterDans(serenity);
+
+        serenity.allerArretSuivant();
+        System.out.println(serenity);
+        System.out.println(kaylee);
+        System.out.println(jayne);
+
+        Usager inara = new PassagerStandard("Inara", 5);
+        inara.monterDans(serenity);
+
+        serenity.allerArretSuivant();
+        System.out.println(serenity);
+        System.out.println(kaylee);
+        System.out.println(jayne);
+        System.out.println(inara);
+
+        serenity.allerArretSuivant();
+        System.out.println(serenity);
+        System.out.println(kaylee);
+        System.out.println(jayne);
+        System.out.println(inara);
+
+        serenity.allerArretSuivant();
+        System.out.println(serenity);
+        System.out.println(kaylee);
+        System.out.println(jayne);
+        System.out.println(inara);
+    }
+}
+```
+
+### Personne 2 : Tests Complémentaires Passager
+```java
+// À compléter : tests avancés dans PassagerStandardTest.java
+private static void testCasLimites() {
+    // Test avec destination = 1
+    PassagerStandard p1 = new PassagerStandard("Dest1", 1);
+    // Test avec destination très grande
+    PassagerStandard p2 = new PassagerStandard("Dest100", 100);
+    // Test avec nom vide
+    PassagerStandard p3 = new PassagerStandard("", 5);
+    
+    System.out.println("Tests cas limites : OK");
+}
+
+private static void testInteractionBus() {
+    // Test d'interaction complète avec un autobus
+    Autobus bus = new Autobus(2, 2);
+    PassagerStandard p = new PassagerStandard("Test", 3);
+    
+    try {
+        p.monterDans(bus);
+        assert p.estAssis() || p.estDebout();
+        System.out.println("Test interaction bus : OK");
+    } catch (UsagerInvalideException e) {
+        System.err.println("Erreur : " + e.getMessage());
+    }
+}
+```
+
+### Personne 3 : Tests Complémentaires Autobus
+```java
+// À compléter : tests avancés dans AutobusTest.java
+private static void testCapaciteMaximale() {
+    Autobus bus = new Autobus(1, 1);
+    PassagerStandard p1 = new PassagerStandard("P1", 5);
+    PassagerStandard p2 = new PassagerStandard("P2", 5);
+    PassagerStandard p3 = new PassagerStandard("P3", 5);
+    
+    p1.monterDans(bus);
+    p2.monterDans(bus);
+    p3.monterDans(bus); // Ne devrait pas monter
+    
+    // Vérifier que seulement 2 passagers sont dans le bus
+    System.out.println("Test capacité maximale : OK");
+}
+
+private static void testChangerPlace() {
+    Autobus bus = new Autobus(1, 1);
+    PassagerStandard p = new PassagerStandard("Test", 5);
+    
+    p.monterDans(bus);
+    // Test changement de place
+    if (p.estAssis()) {
+        bus.demanderChangerEnDebout(p);
+        assert p.estDebout();
+    }
+    
+    System.out.println("Test changement place : OK");
+}
+```
+
+## Phase 4 : Finalisation (Jour 5)
+
+### Personne 1 : Documentation et Finalisation
+```java
+// À ajouter : Javadoc complète pour toutes les classes
+/**
+ * Documentation Javadoc à compléter pour chaque classe et méthode
+ * avec @param, @return, @throws
+ */
+```
+
+### Personne 2 : Optimisation Passager
+```java
+// À optimiser : PassagerStandard.java
+// Ajouter des validations, gérer les cas d'erreur
+// Améliorer les performances si nécessaire
+```
+
+### Personne 3 : Optimisation Autobus
+```java
+// À optimiser : Autobus.java
+// Ajouter des validations, gérer les cas d'erreur
+// Améliorer la gestion des passagers
+```
+
+## Planning Quotidien
 
 ### Matin (9h-12h)
-- 30 min : Point d'équipe sur l'avancement
-- 2h30 : Développement individuel selon les tâches du jour
+- **30 min** : Point d'équipe sur l'avancement
+- **2h30** : Codage individuel des tâches du jour
 
 ### Après-midi (14h-17h)
-- 2h : Développement individuel
-- 1h : Code review et intégration
+- **2h** : Codage individuel
+- **1h** : Tests et intégration avec les autres
 
 ### Fin de journée (17h-17h30)
-- 30 min : Bilan et planification du lendemain
+- **30 min** : Mise à jour du code partagé et planification
 
-## Outils de Collaboration
+## Vérification Quotidienne
 
-### Gestion de Version
-- **Git** avec branches :
-  - `master` : version stable
-  - `develop` : développement en cours
-  - `feature/passager-*` : développement lié aux passagers
-  - `feature/transport-*` : développement lié au transport
-  - `feature/integration-*` : travaux d'intégration
+### Fin de chaque jour :
+- [ ] Code compilé sans erreur
+- [ ] Tests unitaires passent
+- [ ] Code poussé sur le dépôt partagé
+- [ ] Documentation à jour
 
-### Communication
-- **Slack/Discord** pour communication quotidienne
-- **Réunions quotidiennes** de 15-30 minutes
-- **Code review** systématique avant fusion
+## Résultat Attendu Final
 
-### Suivi de Projet
-- **Trello/GitHub Projects** pour suivre les tâches
-- **Google Drive** pour partage de documents
-- **Pastebin** pour partage de code temporaire
+À la fin du projet, l'exécution de Simple.java doit produire :
+```
+[arret:1, assis:0, debout:0]
+[arret:2, assis:1, debout:1]
+Kaylee assis
+Jayne debout
+[arret:3, assis:1, debout:2]
+Kaylee assis
+Jayne debout
+Inara debout
+[arret:4, assis:1, debout:1]
+Kaylee assis
+Jayne dehors
+Inara debout
+[arret:5, assis:0, debout:0]
+Kaylee dehors
+Jayne dehors
+Inara dehors
+```
 
-## Livrables
-
-### Fin de Phase 1
-- Structure de projet créée
-- Classes de support implémentées
-- Tests unitaires initiaux
-
-### Fin de Phase 2
-- Méthodes d'état implémentées
-- Tests unitaires pour les états
-- Première intégration fonctionnelle
-
-### Fin de Phase 3
-- Logique métier complète
-- Tests unitaires complets
-- Intégration quasi-fonctionnelle
-
-### Fin de Phase 4
-- Intégration complète
-- Tests d'intégration validés
-- Bugs résolus
-
-### Fin de Phase 5
-- Projet finalisé et documenté
-- Tests d'acceptation validés
-- Prêt pour la présentation
-
-## Gestion des Risques
-
-### Risques Techniques
-- **Incompatibilité entre classes** : Tests d'intégration précoces
-- **Performance** : Tests de charge si nécessaire
-- **Bugs complexes** : Session de débogage en équipe
-
-### Risques Organisationnels
-- **Retard** : Réunions de suivi quotidiennes
-- **Conflits** : Médiation par le chef de projet
-- **Absence** : Documentation complète et partage des connaissances
-
-## Critères de Succès
-
-### Techniques
-- [ ] Tous les tests unitaires passent
-- [ ] Simple.java s'exécute correctement
-- [ ] Résultat conforme aux spécifications
-- [ ] Code documenté (Javadoc)
-
-### Organisationnels
-- [ ] Respect des délais
-- [ ] Bonne collaboration d'équipe
-- [ ] Documentation complète
-- [ ] Présentation réussie
-
-Ce plan de travail permet une répartition équilibrée des tâches tout en assurant une collaboration efficace et une intégration progressive du projet.
+Ce plan assure que chaque personne a des tâches de codage concrètes et équilibrées tout au long du projet.
