@@ -11,6 +11,12 @@ public class jaugeNaturel implements IJauge {
     private final long max;
 
     // Construit la jauge avec ses bornes et une valeur de départ.
+    /**
+     * 
+     * @param min : minimum pour la valeur  de la jauge
+     * @param max
+     * @param depart
+     */
     public jaugeNaturel(long min, long max, long depart) {
         this.min = min;
         this.max = max;
