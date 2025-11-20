@@ -6,14 +6,14 @@ package etatPassager;
  *  
  * Les instances de cette classe sont des objets constants.
  **/
+public class EtatPassagerMonter {
 
-public class EtatPassager {
   /**
    * Définit les trois états possible d'un passager dans un transport.
    */
   public enum Etat {/** passager assis à l'intérieur */  ASSIS, 
                     /** passager debout à l'intérieur */ DEBOUT,  
-                    /** passager à l'extérieur */        DEHORS};
+                    /** passager à l'extérieur */        DEHORS}; 
 
   private final Etat monEtat;
 
@@ -22,7 +22,7 @@ public class EtatPassager {
    * 
    * @param e  valeur de l'état.
    */
-  public EtatPassager(Etat e) {
+  public EtatPassagerMonter(Etat e) {
     monEtat = e;
 
     /* Le constructeur d'une classe permet d'initialiser l'etat de l'instance creee.
@@ -64,7 +64,7 @@ public class EtatPassager {
    * @return vrai si instanciation avec ASSIS ou DEBOUT.
    */
   public boolean estInterieur() {
-    return monEtat == Etat.ASSIS || monEtat.DEBOUT ;
+    return monEtat == Etat.ASSIS || monEtat == Etat.DEBOUT;
   }
 
 
@@ -83,9 +83,9 @@ public class EtatPassager {
   public String toString() {
 	String s;
 	if( monEtat == Etat.DEHORS) s= "dehors";
-	else if()monEtat == Etat.ASSIS) s="assis"
-	else s="debous"
-	//if etta ==DEHORS s ="dehors"
+	else if(monEtat == Etat.ASSIS) s="assis";
+	else s="debout";
+	//if etat ==DEHORS s ="dehors"
     return "<" + monEtat + ">";
   }
 }

@@ -6,14 +6,14 @@ package etatPassager;
  *  
  * Les instances de cette classe sont des objets constants.
  **/
-public class EtatPassagerMonter {
+public class EtatPassagerChaine {
 
   /**
    * Définit les trois états possible d'un passager dans un transport.
    */
   public enum Etat {/** passager assis à l'intérieur */  ASSIS, 
                     /** passager debout à l'intérieur */ DEBOUT,  
-                    /** passager à l'extérieur       DEHORS}; */ 
+                    /** passager à l'extérieur */        DEHORS};
 
   private final Etat monEtat;
 
@@ -22,7 +22,7 @@ public class EtatPassagerMonter {
    * 
    * @param e  valeur de l'état.
    */
-  public EtatPassager(Etat e) {
+  public EtatPassagerChaine(Etat e) {
     monEtat = e;
 
     /* Le constructeur d'une classe permet d'initialiser l'etat de l'instance creee.
@@ -30,14 +30,14 @@ public class EtatPassagerMonter {
      */
   }
 
-
   /**
    * Le passager est-il à l'extérieur du transport ?
    *
    * @return vrai si instanciation avec DEHORS;
    */
   public boolean estExterieur() {
-    return  monEtat == Etat.DEHORS;
+	  
+	 return monEtat == Etat.DEHORS;
   }
 
   /**
@@ -46,7 +46,7 @@ public class EtatPassagerMonter {
    * @return vrai si instanciation avec ASSIS;
    */
   public boolean estAssis() {
-    return monEtat 	== Etat.ASSIS;
+    return monEtat == Etat.ASSIS;
   }
 
   /**
@@ -55,7 +55,7 @@ public class EtatPassagerMonter {
    * @return vrai si instanciation avec DEBOUT;
    */
   public boolean estDebout() {
-    return monEtat == Etat.DEBOUT;
+	  return monEtat == Etat.DEBOUT;
   }
 
   /**
@@ -64,7 +64,7 @@ public class EtatPassagerMonter {
    * @return vrai si instanciation avec ASSIS ou DEBOUT.
    */
   public boolean estInterieur() {
-    return monEtat == Etat.ASSIS || Etat.DEBOUT ;
+	  return monEtat == Etat.ASSIS || monEtat == Etat.DEBOUT;
   }
 
 
@@ -81,11 +81,10 @@ public class EtatPassagerMonter {
    */
   @Override
   public String toString() {
-	String s;
-	if( monEtat == Etat.DEHORS) s= "dehors";
-	else if()monEtat == Etat.ASSIS) s="assis"
-	else s="debous"
-	//if etta ==DEHORS s ="dehors"
-    return "<" + monEtat + ">";
+	  String s;
+	  if( monEtat == Etat.DEHORS) s= "dehors";
+	  else if(monEtat == Etat.ASSIS) s="assis";
+	  else s="debout";//if etat ==DEHORS s ="dehors";
+	  return "<" + monEtat + ">";
   }
 }

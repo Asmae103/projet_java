@@ -1,19 +1,19 @@
 package etatPassager;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.*;
+
 public class EtatPassagerMonterTest {
 
-	EtatPassager passager1,passager2,passager3,passager4,passager5,passager6;
-     ;
+	EtatPassagerMonter passager1,passager2,passager3,passager4,passager5,passager6;
     
-    //
     @Before
     public void initialiser() throws Exception {
-    	passager1 = new EtatPassager(DEHOS);
-    	passager2 = new EtatPassager(ASSIS);
-    	passager3 = new EtatPassager(DEBOUT);
-    	passager4 = new EtatPassager(ASSIS);
-    	passager5 = new EtatPassager(DEBOUT);
-    	passager6 = new EtatPassager(DEHORS);
+    	passager1 = new EtatPassagerMonter(EtatPassagerMonter.Etat.DEHORS);
+    	passager2 = new EtatPassagerMonter(EtatPassagerMonter.Etat.ASSIS);
+    	passager3 = new EtatPassagerMonter(EtatPassagerMonter.Etat.DEBOUT);
+    	passager4 = new EtatPassagerMonter(EtatPassagerMonter.Etat.ASSIS);
+    	passager5 = new EtatPassagerMonter(EtatPassagerMonter.Etat.DEBOUT);
+    	passager6 = new EtatPassagerMonter(EtatPassagerMonter.Etat.DEHORS);
 
     }
     
@@ -63,6 +63,7 @@ public class EtatPassagerMonterTest {
 		
 		assertTrue("10",passager4.estInterieur());
 		assertTrue("11",passager5.estInterieur());
-		assertFalse("12",passager6.estInterieur);
+		assertFalse("12",passager6.estInterieur());
 		
 	}
+}
