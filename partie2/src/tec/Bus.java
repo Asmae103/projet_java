@@ -69,4 +69,3 @@ interface Bus {
    */
   public void demanderSortie(Passager p);
 }
-

@@ -17,4 +17,3 @@ public interface Transport {
    */
   public void allerArretSuivant() throws UsagerInvalideException;
 }
-

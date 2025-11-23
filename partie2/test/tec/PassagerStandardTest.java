@@ -38,7 +38,7 @@ public class PassagerStandardTest {
 	@Test 
 	public void testNouvelArret() {
 		
-		Bus bus= new Autobus();// 
+		Bus bus = new Autobus(5, 10); // Crée un bus avec 5 places assises et 10 places debout
 		p.nouvelArret(bus,7);
 	}
 	
@@ -50,7 +50,7 @@ public class PassagerStandardTest {
 	@Test
 	public void testMonter() throws UsagerInvalideException {
 		//tester l'appel de la methode
-		Transport t =new Autobus();
+		Transport t = new Autobus(5, 10); // Crée un bus avec 5 places assises et 10 places debout
 		p.monterDans(t);
 		p.nom();
 	}

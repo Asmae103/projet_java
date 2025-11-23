@@ -6,16 +6,22 @@ public class PassagerStandard implements Usager , Passager{
 	private EtatPassager etat;
 	
 	/**
-	 * Constructeur du passager standard.
-     * 
-     * 
-	 * @param nom le nom de paassager
-	 * @param destination L'arret 
-	 * @param etat l'etat initial du passager (assie, debout, dehors)
+	 * Constructeur du passager standard avec état initial.
+	 * @param nom le nom du passager
+	 * @param destination L'arrêt de destination
+	 * @param etat l'état initial du passager (assis, debout, dehors)
 	 */
-	 // Constructeur avec paramètres mais corps vide
 	public PassagerStandard(String nom, int destination, EtatPassager etat) {
-		
+		// TODO: Implémenter la logique du constructeur
+	}
+
+	/**
+	 * Constructeur du passager standard (état initial DEHORS).
+	 * @param nom le nom du passager
+	 * @param destination L'arrêt de destination
+	 */
+	public PassagerStandard(String nom, int destination) {
+		this(nom, destination, new EtatPassager(EtatPassager.Etat.DEHORS));
 	}
 
 	

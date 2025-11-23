@@ -71,4 +71,3 @@ interface Passager {
    */
   public void nouvelArret(Bus bus, int numeroArret);
 }
-
