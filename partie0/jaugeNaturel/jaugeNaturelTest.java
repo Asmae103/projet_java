@@ -4,11 +4,21 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
+/** 
+ * Classe de tests unitaires pour la classe jaugeNaturel.
+ *Contient des méthodes de test pour vérifier les états bleu, vert et rouge.
+ */
+
 public class jaugeNaturelTest {
-    
+    /**
+     * Création de plusieurs jauges avant chaque test.
+     */
     jaugeNaturel jauge1,jauge11,jauge2,jauge3,jauge4, jauge5,jauge6,jauge7,jauge8,jauge9, jauge10, jauge12;
     
-    
+    /**
+     * Initialise les valeurs de test.
+     * @throws Exception si une erreur d'initialisation survient.
+     */
     @Before
     public void initialiser() throws Exception {
 
@@ -26,7 +36,14 @@ public class jaugeNaturelTest {
     jauge12=  new jaugeNaturel(15,15,15);
     }
     
+    /**
+     * Réinitialisation après chaque test.
+     */
     
+    /**
+     * Nettoie les objets utilisés pour les tests.
+     * @throws Exception si un problème survient pendant le nettoyage.
+     */
     
     @After
     public void nettoyer() throws Exception {
@@ -47,11 +64,10 @@ public class jaugeNaturelTest {
 
     /**
     * Etat après instanciation pour une valeur de départ dans l'intervalle de vigie.
-    *
-    * <p> A vérifier :
-    *  <p>estBleu() retourne faux.
-    *  <p>estVert() retourne vrai.
-    *  <p>estRouge() retourne faux.
+    *  A vérifier :
+    *  estBleu() retourne faux.
+    * estVert() retourne vrai.
+    *  estRouge() retourne faux.
     */
    
     @Test
@@ -62,6 +78,12 @@ public class jaugeNaturelTest {
        assertTrue(jauge11.estVert());
        assertFalse(jauge11.estRouge());
       }
+    
+
+	/**
+	 * Test des déplacements : decrementer puis incrementer.
+	 */
+    
     @Test
     public void testDeplacer() {
     	jauge4.decrementer();
@@ -75,7 +97,10 @@ public class jaugeNaturelTest {
     	assertTrue("vert inc",jauge4.estVert());
     	assertFalse("rouge inc",jauge4.estRouge());
     }
-    
+    /**
+     * Test : valeur plus petite que vigieMin → la jauge doit être bleue.
+     */
+
     @Test
     public void testInferieurIntervalle() {
     	assertTrue(jauge5.estBleu());
@@ -87,6 +112,9 @@ public class jaugeNaturelTest {
     	assertFalse("rouge ",jauge6.estRouge());
     }
     
+    /**
+     * Test : valeur plus grande que vigieMax → la jauge doit être rouge.
+     */
     @Test
     public void testSuperieurIntervalle() {
     	assertFalse(jauge7.estBleu());
@@ -97,6 +125,11 @@ public class jaugeNaturelTest {
     	assertFalse(jauge8.estVert());
     	assertTrue("rouge ",jauge8.estRouge());
     }
+    
+    /**
+     * Test d'un cas où  vigieMax inferieur à vigieMin  .
+     */
+
     @Test
     public void testLimiteVigieMaxInferieurVigieMin() {
     	assertTrue(jauge9.estBleu());
@@ -104,6 +137,10 @@ public class jaugeNaturelTest {
     	assertTrue("rouge ",jauge9.estRouge());
     	
     }
+	
+	/**
+	 * Test : vigieMin = vigieMax.
+	 */
     
     @Test
     public void testMaxEgaleMin(){

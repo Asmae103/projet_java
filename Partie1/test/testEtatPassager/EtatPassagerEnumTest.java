@@ -1,4 +1,8 @@
-package etatPassager;
+package testEtatPassager;
+
+import etatPassager.EtatPassager;
+import etatPassager.IEtatPassager;
+import etatPassager.EtatPassager.Etat;
 
 // Classe "lanceur de test" pour la version EtatPassager avec Enum.
 // Son seul rôle est de dire à AbstractEtatPassagerTest quelle classe concrète tester.

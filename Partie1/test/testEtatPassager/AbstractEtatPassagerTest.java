@@ -1,7 +1,9 @@
-package etatPassager;
+package testEtatPassager;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import etatPassager.IEtatPassager;
 
 // Plan de test pour tous les types de passagers.
 public abstract class AbstractEtatPassagerTest {

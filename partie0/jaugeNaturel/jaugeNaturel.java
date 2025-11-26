@@ -1,6 +1,8 @@
 package jaugeNaturel;
 
-
+/**
+ * Classe représentant une jauge avec un niveau compris entre un minimum et un maximum.
+ */
 public class jaugeNaturel {
   private final long min;
   private final long max;
@@ -13,6 +15,7 @@ public class jaugeNaturel {
    * @param vigieMax valeur maximale de l'intervalle de vigie.
    * @param depart   valeur initiale de la jauge.
    */
+  
   public jaugeNaturel(long vigieMin, long vigieMax, long depart) {
     min = vigieMin;
     max = vigieMax;
@@ -26,7 +29,7 @@ public class jaugeNaturel {
   /**
    * L'état de la jauge est-il rouge ?
    *
-   * @return vrai si niveau >=  vigieMax.
+   * @return vrai si niveau supérieur ou égal à vigieMax.
    *
    */
   public boolean estRouge() {
@@ -47,7 +50,7 @@ public class jaugeNaturel {
   /**
    * L'état de la jauge est-il bleu ?
    *
-   * @return vrai si niveau <= vigieMin.
+   * @return vrai si niveau inferieur ou égale à vigieMin.
    */
   public boolean estBleu() {
     return (niveau <= min);
@@ -83,8 +86,10 @@ public class jaugeNaturel {
    * Pour les chaînes de cararctères, l'opérateur + correspond a la concaténation.
    * Les valeurs numériques sont alors convertit en ascii.
    * Si l'état d'une instance de cette classe est min=-456, max=23,
-   * valeur=-7, la concaténation donne la chaîne "<-7 [-456,23]>".
-   */
+   */ 
+  
+     //valeur=-7, la concaténation donne la chaîne  <-7 [-456,23]> .
+ 
   @Override
   public String toString() {
     return "<" + niveau + " [" + min + "," + max + "]>";

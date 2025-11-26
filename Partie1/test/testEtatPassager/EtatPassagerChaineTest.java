@@ -1,4 +1,7 @@
-package etatPassager;
+package testEtatPassager;
+
+import etatPassager.EtatPassagerChaine;
+import etatPassager.IEtatPassager;
 
 // Classe "lanceur de test" pour la version EtatPassagerChaine.
 // Son seul rôle est de dire à AbstractEtatPassagerTest quelle classe concrète tester.

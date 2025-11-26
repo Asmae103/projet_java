@@ -1,7 +1,9 @@
-package jauge;
+package testJaugeNaturel;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import jauge.IJauge;
 
 // Plan de test abstrait pour toutes les implémentations de IJauge.
 public abstract class AbstractJaugeTest {

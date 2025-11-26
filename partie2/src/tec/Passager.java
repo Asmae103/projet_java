@@ -64,7 +64,7 @@ interface Passager {
   /**
    * Indique au passager qu'il est arrivé à un nouvel arrêt. Cette methode
    * fixe le comportement (changer de place ou sortir). 
-   * Cette méthode est appelée par Bus.
+   * Cetter  méthode est appelée par Bus.
    *
    * @param bus le bus dans lequel se trouve le passager.
    * @param numeroArret numero de l'arrêt.

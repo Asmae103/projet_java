@@ -13,7 +13,7 @@ public class PassagerStandard implements Usager , Passager{
 	 * @param destination L'arret 
 	 * @param etat l'etat initial du passager (assie, debout, dehors)
 	 */
-	 // Constructeur avec paramètres mais corps vide
+	
 	public PassagerStandard(String nom, int destination, EtatPassager etat) {
 		
 	}
@@ -72,6 +72,16 @@ public class PassagerStandard implements Usager , Passager{
 	public void monterDans(Transport t) throws UsagerInvalideException {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "PassagerStandard [nom=" + nom + ", destination=" + destination + ", etat=" + etat + ", estDehors()="
+				+ estDehors() + ", estAssis()=" + estAssis() + ", estDebout()=" + estDebout() + ", nom()=" + nom()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 	
 

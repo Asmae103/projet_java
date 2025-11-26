@@ -1,4 +1,7 @@
-package jauge;
+package testJaugeNaturel;
+
+import jauge.IJauge;
+import jauge.JaugeDistance;
 
 // Classe "lanceur de test" pour la version JaugeDistance.
 // Son seul rôle est de dire à AbstractJaugeTest quelle classe concrète tester.

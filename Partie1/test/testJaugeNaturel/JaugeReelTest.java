@@ -1,4 +1,7 @@
-package jauge;
+package testJaugeNaturel;
+
+import jauge.IJauge;
+import jauge.JaugeReel;
 
 // Classe "lanceur de test" pour la version JaugeReel.
 // Son seul rôle est de dire à AbstractJaugeTest quelle classe concrète tester.

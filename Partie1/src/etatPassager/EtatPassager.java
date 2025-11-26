@@ -1,4 +1,4 @@
-package etatPassager;
+ package etatPassager;
 
 // Implémentation de IEtatPassager qui utilise une énumération (enum).
 public class EtatPassager implements IEtatPassager {
