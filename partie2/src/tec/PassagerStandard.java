@@ -79,11 +79,14 @@ public class PassagerStandard implements Usager , Passager{
 	}
 
 
-
 	@Override
 	public String toString() {
-		return "PassagerStandard [nom=" + nom + ", destination=" + destination + ", etat=" + etat + "]";
+		return "PassagerStandard [nom=" + nom + ", destination=" + destination + "]";
 	}
+
+
+
+
 
 
 

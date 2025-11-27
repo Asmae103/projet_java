@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;// 
 public class PassagerStandardTest {
+	
 	PassagerStandard p = new PassagerStandard("Tom", 6,  new EtatPassager(EtatPassager.Etat.DEHORS));
 	
-	/**
-     * Vérifie que les méthodes d'état peuvent être appelées sur une instance instanciée dehors.
-     * Les méthodes retournent la valeur correspondant à l'état courant.
+	 /**
+     * Teste les états de base d'un passager : assis, debout, dehors.
      */
 	@Test 
 	public void testEtats() {
@@ -19,7 +19,7 @@ public class PassagerStandardTest {
 		assertFalse(p.estDebout());
 		}
 	/**
-     * Vérifie que l'état d'un passager instancié assis est cohérent avec les accesseurs.
+     * Vérifie qu'un passager instancié assis est bien assis.
      */
 	@Test
 	public void testInstanciationAssis() { 
@@ -29,7 +29,7 @@ public class PassagerStandardTest {
 		assertFalse("3",p1.estDebout());
 	}
 	 /**
-     * Vérifie que l'état d'un passager instancié debout est cohérent avec les accesseurs.
+     * Vérifie qu'un passager instancié debout est bien debout.
      */
 	@Test
 	public void testInstanciationDebout() { 
@@ -39,7 +39,7 @@ public class PassagerStandardTest {
 		assertTrue("6",p1.estDebout());
 	}
 	 /**
-     * Vérifie la cohérence de l'état lorsque le passager est instancié dehors.
+     * Vérifie qu'un passager instancié dehors est bien dehors.
      */
 	@Test 
 	public void testInstanciationDehors() { 
@@ -77,35 +77,80 @@ public class PassagerStandardTest {
 		assertFalse("Debout3",p.estDebout());
 		assertTrue("Dehors3",p.estDehors());
 	}
+	
+	
+	/**
+	 * Vérifie que monterDans() demande une place assise quand le bus
+	 * en propose une via un FauxBusAssis. Le passager doit devenir assis.
+	 */
+
+	@Test
+	public void testMonterFauxBusAssis() throws UsagerInvalideException {
+		
+		FauxBusAssis fba = new FauxBusAssis();
+		p.monterDans(fba);
+		
+		assertTrue("Assis4",p.estAssis());
+		assertFalse("Debout4",p.estDebout());
+		assertFalse("Dehors4",p.estDehors());
+		
+		assertEquals(":demanderPlaceAssise:", fba.message);
+	}
+	
+	/**
+	 * Vérifie que monterDans() demande une place debout quand seule
+	 * une place debout est disponible via un FauxBusDebout. Le passager
+	 * doit devenir debout.
+	 */
+	@Test
+	public void testMonterFauxBusDebout() throws UsagerInvalideException {
+		
+		FauxBusDebout fbd = new FauxBusDebout();
+		p.monterDans(fbd);
+		
+		assertFalse("Assis5",p.estAssis());
+		assertTrue("Debout5",p.estDebout());
+		assertFalse("Dehors5",p.estDehors());
+		
+		assertEquals(":demanderPlaceDebout:", fbd.message);
+	}
+	
+	/**
+	 * Vérifie que monterDans() ne change pas l'état du passager lorsque
+	 * le bus n'a aucune place disponible (FauxBusPlein). Le passager reste dehors.
+	 */
+	@Test
+	public void testMonterFauxBusPlein() throws UsagerInvalideException {
+		FauxBusPlein fbp = new FauxBusPlein();
+		p.monterDans(fbp);
+		
+		assertFalse("Assis6",p.estAssis());
+		assertFalse("Debout6",p.estDebout());
+		assertTrue("Dehors6",p.estDehors());
+		
+		assertEquals("Bus Plein", fbp.message);
+		
+	}
 
 	 /**
      * Vérifie l'appel de la méthode nouvelArret.
      * Le corps de la méthode est vide dans cette itération, donc aucun changement d'état n'est attendu.
      */
+	
+	
 	@Test 
 	public void testNouvelArret() {
+		FauxBusVide fbv = new FauxBusVide();
+        p.nouvelArret(fbv,4);
 		
-		/*
-		 * Bus bus= new Autobus();// p.nouvelArret(bus,7);
-		 * 
-		 * assertFalse("Assis4",p.estAssis()); assertFalse("Debout4",p.estDebout());
-		 * assertTrue("Dehors4",p.estDehors());
-		 */
+		assertFalse("Assis7",p.estAssis());
+		assertFalse("Debout7",p.estDebout());
+		assertTrue("Dehors7",p.estDehors());
+		
+		assertEquals("Bus Vide", fbv.message);
+		
+		
 	}
 	
-	/**
-     * Vérifie l'appel de la méthode monterDans.
-     * Le corps de la méthode est vide dans cette itération, donc aucun changement d'état n'est attendu.
-     */
-	@Test
-	public void testMonter() throws UsagerInvalideException {
-		//tester l'appel de la methode
-		/*
-		 * Transport t =new Autobus();
-		 * 
-		 * p.monterDans(t); assertTrue("Assis5",p.estAssis());
-		 * assertFalse("Debout5",p.estDebout()); assertFalse("Dehors5",p.estDehors());
-		 * p.nom();
-		 */
-	}
+
 }

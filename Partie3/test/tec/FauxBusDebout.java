@@ -1,35 +1,37 @@
 package tec;
 
-public class FauxBusDebout {
+public class FauxBusDebout implements Bus, Transport {
 	  String message = "???";
 
-	  boolean aPlaceAssise() {
+	  public boolean aPlaceAssise() {
 	    return false;
 	  }
 
-	  boolean aPlaceDebout() {
+	  public boolean aPlaceDebout() {
 	    return true;
 	  }
 
-	  void demanderPlaceAssise(Passager p) {
+	  public void demanderPlaceAssise(Passager p) {
 	    message = ":demanderPlaceAssise:";
+	    p.accepterPlaceAssise();
 	  }
 
-	  void demanderPlaceDebout(Passager p) {
+	  public void demanderPlaceDebout(Passager p) {
 	    message = ":demanderPlaceDebout:";
 	    p.accepterPlaceDebout();
 	  }
 
-	  void demanderChangerEnDebout(Passager p) {
+	  public void demanderChangerEnDebout(Passager p) {
 	    message = ":demanderChangerEnDebout:";
 	    p.accepterPlaceDebout();
 	  }
 	  
-	  void demanderChangerEnAssis(Passager p) {
+	  public void demanderChangerEnAssis(Passager p) {
 	    message = ":demanderChangerEnAssis:";
+	    p.accepterPlaceAssise();
 	  }
 
-	  void demanderSortie(Passager p) {
+	  public void demanderSortie(Passager p) {
 	    message = ":demanderSortie:";    
 	    p.accepterSortie();
 	  }

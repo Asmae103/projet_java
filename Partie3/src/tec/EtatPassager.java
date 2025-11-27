@@ -59,6 +59,6 @@ public class EtatPassager implements IEtatPassager {
     // Fournit une représentation textuelle de l'objet.
     @Override
     public String toString() {
-        return "<" + monEtat.toString().toLowerCase() + ">";
+        return  " "+ monEtat.toString().toLowerCase() ;
     }
 }
