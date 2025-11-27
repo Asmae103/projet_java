@@ -5,13 +5,25 @@ import org.junit.Test;
 
 import jauge.IJauge;
 
-// Plan de test abstrait pour toutes les implémentations de IJauge.
+/**
+ *  Classe  de test abstrait pour toutes les implémentations de IJauge.
+ *  Les classes qui héritent de cette classe doivent fournir une méthode
+ * pour créer une jauge concrète à partir de valeurs min, max et val.
+ */
 public abstract class AbstractJaugeTest {
 
-    // Méthode à remplir par les classes filles pour fournir une jauge concrète.
+	/**
+     * Crée une jauge avec une valeur minimale, maximale et une valeur initiale.
+     * @param min valeur minimale
+     * @param max valeur maximale
+     * @param val valeur initiale
+     * @return une jauge créée avec les paramètres donnés
+     */
     protected abstract IJauge creerJauge(long min, long max, long val);
 
-    // Teste le cas où la valeur est bien entre les bornes.
+    /**
+     *  Teste le cas où la valeur est bien entre les bornes.
+     */
     @Test
     public void testDansIntervalle() {
         IJauge j = creerJauge(100, 200, 150);
@@ -20,7 +32,9 @@ public abstract class AbstractJaugeTest {
         assertFalse(j.estRouge());
     }
 
-    // Teste le cas où la valeur est exactement sur la borne inférieure.
+    /**
+     *  Teste le cas où la valeur est exactement sur la borne inférieure.
+     */
     @Test
     public void testLimiteInferieure() {
         IJauge j = creerJauge(100, 200, 100);
@@ -29,7 +43,9 @@ public abstract class AbstractJaugeTest {
         assertFalse(j.estRouge());
     }
 
-    // Teste le cas où la valeur est exactement sur la borne supérieure.
+    /**
+     *  Teste le cas où la valeur est exactement sur la borne supérieure.
+     */
     @Test
     public void testLimiteSuperieure() {
         IJauge j = creerJauge(100, 200, 200);
@@ -38,7 +54,9 @@ public abstract class AbstractJaugeTest {
         assertTrue(j.estRouge());
     }
 
-    // Teste les méthodes incrementer() et decrementer().
+    /**
+     *  Teste les méthodes incrementer() et decrementer().
+     */
     @Test
     public void testDeplacer() {
         IJauge j = creerJauge(10, 100, 12);

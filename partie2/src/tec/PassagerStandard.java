@@ -20,6 +20,20 @@ public class PassagerStandard implements Usager , Passager{
 
 	
 	
+	
+
+
+
+	public PassagerStandard(String string, int i) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+
+
 	@Override
 	public boolean estDehors() {
 		// TODO Auto-generated method stub
@@ -78,11 +92,12 @@ public class PassagerStandard implements Usager , Passager{
 
 	@Override
 	public String toString() {
-		return "PassagerStandard [nom=" + nom + ", destination=" + destination + ", etat=" + etat + ", estDehors()="
-				+ estDehors() + ", estAssis()=" + estAssis() + ", estDebout()=" + estDebout() + ", nom()=" + nom()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "PassagerStandard [nom=" + nom + ", destination=" + destination + ", etat=" + etat + "]";
 	}
+
+
+
+	
 	
 
 }

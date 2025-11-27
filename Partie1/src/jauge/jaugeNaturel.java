@@ -1,6 +1,8 @@
 package jauge;
 
-// Implémentation standard de IJauge qui utilise des nombres entiers (long).
+/**
+ *  Implémentation standard de IJauge qui utilise des nombres entiers (long).
+ */
 public class jaugeNaturel implements IJauge {
     
     // La valeur actuelle de la jauge.
@@ -23,23 +25,33 @@ public class jaugeNaturel implements IJauge {
         this.niveau = depart;
     }
 
-    // Vrai si la valeur est supérieure ou égale à la borne max.
+    /**
+     *  Vrai si la valeur est supérieure ou égale à la borne max.
+     */
     @Override
     public boolean estRouge() { return niveau >= max; }
     
-    // Vrai si la valeur est strictement entre les bornes min et max.
+    /**
+     *  Vrai si la valeur est strictement entre les bornes min et max.
+     */
     @Override
     public boolean estVert() { return niveau > min && niveau < max; }
     
-    // Vrai si la valeur est inférieure ou égale à la borne min.
+    /**
+     *  Vrai si la valeur est inférieure ou égale à la borne min.
+     */
     @Override
     public boolean estBleu() { return niveau <= min; }
     
-    // Augmente le niveau de 1.
+    /**
+     *  Augmente le niveau de 1.
+     */
     @Override
     public void incrementer() { niveau++; }
     
-    // Diminue le niveau de 1.
+    /**
+     * Diminue le niveau de 1.
+     */
     @Override
     public void decrementer() { niveau--; }
 }

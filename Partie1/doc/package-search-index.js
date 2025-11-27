@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"etatPassager"},{"l":"jauge"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"etatPassager"},{"l":"jauge"},{"l":"testEtatPassager"},{"l":"testJaugeNaturel"}];updateSearchResults();

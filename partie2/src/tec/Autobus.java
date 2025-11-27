@@ -2,6 +2,14 @@ package tec;
 
 public class Autobus implements Bus , Transport {
 	
+	/**
+	 * Constructeur de l'Autobus.
+	 * @param placesAssises nombre de places assises
+	 * @param placesDebout nombre de places debout
+	 */
+	public Autobus(int placesAssises, int placesDebout) {
+		// TODO: Implémenter la logique du constructeur
+	}
 
 	@Override
 	public void allerArretSuivant() throws UsagerInvalideException {
