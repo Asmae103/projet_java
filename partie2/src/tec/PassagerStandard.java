@@ -3,7 +3,14 @@ package tec;
 public class PassagerStandard implements Usager , Passager{
 	private String nom;
 	private int destination;
-	private EtatPassager etat;
+	/*
+	 *  * @param etat l'etat initial du passager (assie, debout, dehors)
+
+	 * public PassagerStandard(String nom, int destination, EtatPassager etat) {
+	 * 
+	 * }
+	 */
+
 	
 	/**
 	 * Constructeur du passager standard.
@@ -11,27 +18,10 @@ public class PassagerStandard implements Usager , Passager{
      * 
 	 * @param nom le nom de paassager
 	 * @param destination L'arret 
-	 * @param etat l'etat initial du passager (assie, debout, dehors)
 	 */
-	
-	public PassagerStandard(String nom, int destination, EtatPassager etat) {
-		
-	}
-
-	
-	
-	
-
-
-
 	public PassagerStandard(String string, int i) {
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-
-
 
 
 	@Override

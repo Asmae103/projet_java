@@ -3,8 +3,8 @@ package tec;
 import org.junit.Test;
 
 public class PassagerStandardTest {
-	PassagerStandard p = new PassagerStandard("Tom", 6,  new EtatPassager(EtatPassager.Etat.DEHORS));
-	
+	//PassagerStandard p = new PassagerStandard("Tom", 6,  new EtatPassager(EtatPassager.Etat.DEHORS));
+	PassagerStandard p = new PassagerStandard("Tom", 6);
 	/**
 	 * Verifie que les methodes d'etat peuvent etre appeler 
 	 * les methodes ont un corps vide ou retourne un false par default
