@@ -103,4 +103,5 @@ public class AutobusTest {
         assertTrue(passager.estDebout());
         assertEquals("[arret:1, assis:0, debout:1]", bus.toString());
     }
+    
 }
