@@ -54,4 +54,22 @@ public class jaugeNaturel implements IJauge {
      */
     @Override
     public void decrementer() { niveau--; }
+    
+    /**
+     * Retourne la valeur courante de la jauge.
+     *
+     * @return niveau courant
+     */
+    public long getNiveau() {
+        return niveau;
+    }
+    
+    /**
+     * Représentation textuelle de la jauge au format du sujet :
+     * "<niveau [min,max]>".
+     */
+    @Override
+    public String toString() {
+        return "<" + niveau + " [" + min + "," + max + "]>";
+    }
 }

@@ -1,41 +1,106 @@
 package tec;
+
 import static org.junit.Assert.*;
-import org.junit.Test;
 
+import org.junit.Test;// 
+
+
+/**
+ * Classe de test pour Autobus.
+ */
 public class AutobusTest {
-    Autobus a = new Autobus(10, 20);
 
     /**
-     * Vérifie que les méthodes d'état peuvent être appelées
-     * les méthodes ont un corps vide ou retournent false par défaut
+     * Teste la création d'un autobus.
      */
     @Test
-    public void testPlaces() {
-        assertTrue("1",a.aPlaceAssise());
-        assertTrue("2",a.aPlaceDebout());
+    public void testCreationAutobus() {
+        Autobus bus = new Autobus(2, 3);
+
+        assertTrue(bus.aPlaceAssise());
+        assertTrue(bus.aPlaceDebout());
+        assertEquals("[arret:1, assis:0, debout:0]", bus.toString());
     }
 
     /**
-     * Vérification d'exécution des méthodes sans exception
-     * Ces méthodes ont actuellement un corps vide
+     * Teste la demande de place assise.
      */
     @Test
-    public void testDemander() {
-        Passager p = new PassagerStandard("Test", 5);
-        a.demanderPlaceAssise(null);
-        a.demanderPlaceDebout(null);
-        a.demanderChangerEnDebout(null);
-        a.demanderChangerEnAssis(null);
-        a.demanderSortie(null);
+    public void testDemanderPlaceAssise() {
+        Autobus bus = new Autobus(1, 1);
+        PassagerStandard passager = new PassagerStandard("Test", 2);
+
+        bus.demanderPlaceAssise(passager);
+
+        assertTrue(passager.estAssis());
+        assertEquals("[arret:1, assis:1, debout:0]", bus.toString());
     }
 
     /**
-     * Appeler la méthode allerArretSuivant
-     * le corps de la méthode est vide donc aucune action
-     * @throws UsagerInvalideException 
+     * Teste la demande de place debout.
+     */
+    @Test
+    public void testDemanderPlaceDebout() {
+        Autobus bus = new Autobus(1, 1);
+        PassagerStandard passager = new PassagerStandard("Test", 2);
+
+        bus.demanderPlaceDebout(passager);
+
+        assertTrue(passager.estDebout());
+        assertEquals("[arret:1, assis:0, debout:1]", bus.toString());
+    }
+
+    /**
+     * Teste la demande de sortie.
+     */
+    @Test
+    public void testDemanderSortie() {
+        Autobus bus = new Autobus(1, 1);
+        PassagerStandard passager = new PassagerStandard("Test", 2);
+
+        bus.demanderPlaceAssise(passager);
+        assertTrue(passager.estAssis());
+
+        bus.demanderSortie(passager);
+        assertTrue(passager.estDehors());
+        assertEquals("[arret:1, assis:0, debout:0]", bus.toString());
+    }
+
+    /**
+     * Teste aller à l'arrêt suivant.
      */
     @Test
     public void testAllerArretSuivant() throws UsagerInvalideException {
-        a.allerArretSuivant();
+        Autobus bus = new Autobus(1, 1);
+
+        bus.allerArretSuivant();
+        assertEquals("[arret:2, assis:0, debout:0]", bus.toString());
+    }
+
+    /**
+     * Teste qu'un bus plein n'accepte pas de nouveaux passagers.
+     */
+    @Test
+    public void testBusPlein() {
+        Autobus bus = new Autobus(0, 0); // Aucun place
+
+        assertFalse(bus.aPlaceAssise());
+        assertFalse(bus.aPlaceDebout());
+    }
+
+    /**
+     * Teste le changement de place.
+     */
+    @Test
+    public void testChangementPlace() {
+        Autobus bus = new Autobus(1, 1);
+        PassagerStandard passager = new PassagerStandard("Test", 2);
+
+        bus.demanderPlaceAssise(passager);
+        assertTrue(passager.estAssis());
+
+        bus.demanderChangerEnDebout(passager);
+        assertTrue(passager.estDebout());
+        assertEquals("[arret:1, assis:0, debout:1]", bus.toString());
     }
 }

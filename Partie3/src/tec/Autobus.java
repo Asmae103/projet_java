@@ -1,78 +1,110 @@
 package tec;
 
-public class Autobus implements Bus , Transport {
-     
-	private jaugeNaturel jaugeAssis;
-	private jaugeNaturel jaugeDebout;
+/**
+ * Version minimale d'Autobus pour compilation.
+ * Implémente Transport et Bus.
+ */
+public class Autobus implements Transport, Bus {
 
-	/**
-	 * Constructeur de l'Autobus.
-	 * @param placesAssises nombre de places assises
-	 * @param placesDebout nombre de places debout
-	 */
-	public Autobus(int placesAssises, int placesDebout) {
-		// JaugeNaturel(min, max, niveau)
-		// min = 0      → niveau minimum autorisé (jamais de passagers négatifs)
-		// max = placesAssises  → capacité maximale du bus
-		// niveau = 0  → nombre de passagers actuels (bus vide au départ)
-		jaugeAssis = new jaugeNaturel(0, placesAssises, 0);
-		jaugeDebout = new jaugeNaturel(0, placesDebout, 0);
-	}
+    private jaugeNaturel jaugeAssis;
+    private jaugeNaturel jaugeDebout;
+    private Passager[] passagers;
+    private int numeroArret;
 
+    public Autobus(int nbAssis, int nbDebout) {
+        this.jaugeAssis = new jaugeNaturel(0, nbAssis, 0);
+        this.jaugeDebout = new jaugeNaturel(0, nbDebout, 0);
+        this.passagers = new Passager[nbAssis + nbDebout];
+        this.numeroArret = 1;
+    }
 
-	@Override
-	public void allerArretSuivant() throws UsagerInvalideException {
-		// vide en Partie 3
-	}
-    
-	// estRouge = plein, donc !estRouge = il reste une place 
-	@Override
-	public boolean aPlaceAssise() {
-		return !jaugeAssis.estRouge();
-	}
+    private void ajouterPassager(Passager p) {
+        for (int i = 0; i < passagers.length; i++) {
+            if (passagers[i] == null) {
+                passagers[i] = p;
+                break;
+            }
+        }
+    }
 
-	@Override
-	public boolean aPlaceDebout() {
-		return !jaugeDebout.estRouge();
-	}
+    private void retirerPassager(Passager p) {
+        for (int i = 0; i < passagers.length; i++) {
+            if (passagers[i] == p) {
+                passagers[i] = null;
+                break;
+            }
+        }
+    }
 
-	@Override
-	public void demanderPlaceAssise(Passager p) {
-		if (aPlaceAssise()) {
-			jaugeAssis.incrementer();
-		}
-	}
+    @Override
+    public boolean aPlaceAssise() {
+        return !jaugeAssis.estRouge();
+    }
 
-	@Override
-	public void demanderPlaceDebout(Passager p) {
-		if (aPlaceDebout()) {
-			jaugeDebout.incrementer();
-		}
-	}
+    @Override
+    public boolean aPlaceDebout() {
+        return !jaugeDebout.estRouge();
+    }
 
-	@Override
-	public void demanderChangerEnDebout(Passager p) {
-		if (aPlaceDebout()) {
-			jaugeAssis.decrementer();
-			jaugeDebout.incrementer();
-		}
-	}
+    @Override
+    public void demanderPlaceAssise(Passager p) {
+        if (p.estDehors() && aPlaceAssise()) {
+            p.accepterPlaceAssise();
+            jaugeAssis.incrementer();
+            ajouterPassager(p);
+        }
+    }
 
-	@Override
-	public void demanderChangerEnAssis(Passager p) {
-		if (aPlaceAssise()) {
-			jaugeDebout.decrementer();
-			jaugeAssis.incrementer();
-		}
-	}
+    @Override
+    public void demanderPlaceDebout(Passager p) {
+        if (p.estDehors() && aPlaceDebout()) {
+            p.accepterPlaceDebout();
+            jaugeDebout.incrementer();
+            ajouterPassager(p);
+        }
+    }
 
-	@Override
-	public void demanderSortie(Passager p) {
-		// vide en Partie 3
-	}
+    @Override
+    public void demanderChangerEnDebout(Passager p) {
+        if (p.estAssis() && aPlaceDebout()) {
+            p.accepterPlaceDebout();
+            jaugeAssis.decrementer();
+            jaugeDebout.incrementer();
+        }
+    }
 
-	@Override
-	public String toString() {
-		return "[bus assis=" + jaugeAssis + ", debout=" + jaugeDebout + "]";
-	}
+    @Override
+    public void demanderChangerEnAssis(Passager p) {
+        if (p.estDebout() && aPlaceAssise()) {
+            p.accepterPlaceAssise();
+            jaugeDebout.decrementer();
+            jaugeAssis.incrementer();
+        }
+    }
+
+    @Override
+    public void demanderSortie(Passager p) {
+        if (p.estAssis()) {
+            jaugeAssis.decrementer();
+        } else if (p.estDebout()) {
+            jaugeDebout.decrementer();
+        }
+        p.accepterSortie();
+        retirerPassager(p);
+    }
+
+    @Override
+    public void allerArretSuivant() throws UsagerInvalideException {
+        numeroArret++;
+        for (Passager p : passagers) {
+            if (p != null) {
+                p.nouvelArret(this, numeroArret);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "[arret:" + numeroArret + ", assis:" + jaugeAssis.getNiveau() + ", debout:" + jaugeDebout.getNiveau() + "]";
+    }
 }
