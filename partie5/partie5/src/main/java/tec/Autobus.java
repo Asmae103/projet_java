@@ -18,6 +18,7 @@ public class Autobus implements Transport, Bus {
     private Passager[] passagers;
     private int numeroArret;
 
+    
     /**
      * Construit un autobus avec un nombre de places assises et debout.
      * 
