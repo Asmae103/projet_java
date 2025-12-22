@@ -14,6 +14,7 @@ public class AutobusTest {
         a.aPlaceAssise();
         a.aPlaceDebout();
     }
+    //
 
     /**
      * Vérification d'exécution des méthodes sans exception
