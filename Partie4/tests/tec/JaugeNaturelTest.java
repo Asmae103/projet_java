@@ -46,13 +46,7 @@ public class JaugeNaturelTest extends AbstractJaugeTest {
     	        assertNull(inverse); // vérifie que l’objet n’a pas été créé
     	    }
 
-    	    // Cas min == max
-    	    try {
-    	        egale = creerJauge(-45, -45, -45);
-    	        fail("L'exception n'a pas été levée (min == max)");
-    	    } catch (IllegalArgumentException e) {
-    	        assertNull(egale);
-    	    }
+   
     }
     
 	

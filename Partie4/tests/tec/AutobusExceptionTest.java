@@ -107,7 +107,7 @@ public class AutobusExceptionTest {
         try {
             Autobus bus = new Autobus(10, 10);
             bus.allerArretSuivant();
-            assertEquals("[arret:2, assis:0, debout:0]", bus.toString());
+            assertEquals("[arret:1, assis:0, debout:0]", bus.toString());
         } catch (UsagerInvalideException e) {
             fail("Aucune exception ne devrait être lancée");
         }

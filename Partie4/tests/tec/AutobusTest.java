@@ -23,7 +23,8 @@ public class AutobusTest {
 
         assertTrue(bus.aPlaceAssise());
         assertTrue(bus.aPlaceDebout());
-        assertEquals("[arret:1, assis:0, debout:0]", bus.toString());
+        System.out.println("Résultat: " + bus.toString()); 
+        assertEquals("[arret:0, assis:0, debout:0]", bus.toString());
     }
     
     @Test
@@ -43,7 +44,8 @@ public class AutobusTest {
         bus.demanderPlaceAssise(passager);
 
         assertTrue(passager.estAssis());
-        assertEquals("[arret:1, assis:1, debout:0]", bus.toString());
+        System.out.println("Résultat : " + bus.toString()); 
+        assertEquals("[arret:0, assis:1, debout:0]", bus.toString());
     }
 
     /**
@@ -57,7 +59,8 @@ public class AutobusTest {
         bus.demanderPlaceDebout(passager);
 
         assertTrue(passager.estDebout());
-        assertEquals("[arret:1, assis:0, debout:1]", bus.toString());
+        System.out.println("Résultat 2: " + bus.toString()); 
+        assertEquals("[arret:0, assis:0, debout:1]", bus.toString());
     }
 
     /**
@@ -75,7 +78,8 @@ public class AutobusTest {
         assertTrue("Le passager devrait être assis", passager.estAssis());
         bus.demanderSortie(passager);
         assertTrue(passager.estDehors());
-        assertEquals("[arret:1, assis:0, debout:0]", bus.toString());
+        System.out.println("Résultat3 : " + bus.toString());  
+        assertEquals("[arret:0, assis:0, debout:0]", bus.toString());
     }
 
     /**
@@ -86,7 +90,8 @@ public class AutobusTest {
         Autobus bus = new Autobus(1, 1);
 
         bus.allerArretSuivant();
-        assertEquals("[arret:2, assis:0, debout:0]", bus.toString());
+        System.out.println("Résultat 4 : " + bus.toString()); 
+        assertEquals("[arret:1, assis:0, debout:0]", bus.toString());
     }
 
     /**
@@ -113,7 +118,8 @@ public class AutobusTest {
 
         bus.demanderChangerEnDebout(passager);
         assertTrue(passager.estDebout());
-        assertEquals("[arret:1, assis:0, debout:1]", bus.toString());
+        System.out.println("Résultat 5: " + bus.toString()); 
+        assertEquals("[arret:0, assis:0, debout:1]", bus.toString());
     }
     
     

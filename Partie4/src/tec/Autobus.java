@@ -37,7 +37,7 @@ class Autobus implements Transport, Bus {
         this.jaugeAssis = new jaugeNaturel(0, nbAssis, 0);
         this.jaugeDebout = new jaugeNaturel(0, nbDebout, 0);
         this.passagers = new Passager[nbAssis + nbDebout];
-        this.numeroArret = 1;
+        this.numeroArret = 0;
     }
   
   

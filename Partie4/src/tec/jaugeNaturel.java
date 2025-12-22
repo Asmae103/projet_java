@@ -21,9 +21,9 @@ public class jaugeNaturel implements IJauge {
      */
     public jaugeNaturel(long min, long max, long depart) {
     	
-        // min strictement inférieur à max
-        if (min >= max) {
-            throw new IllegalArgumentException("min doit être strictement inférieur à max");
+        
+        if (min > max) {
+            throw new IllegalArgumentException("min doit être inférieur ou égale à max");
         }
         
         this.min = min;
