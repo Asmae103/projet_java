@@ -6,8 +6,8 @@ package etatPassager;
  *  
  * Les instances de cette classe sont des objets constants.
  **/
-public class EtatPassagerChaine {
 
+public class EtatPassager {
   /**
    * Définit les trois états possible d'un passager dans un transport.
    */
@@ -30,14 +30,14 @@ public class EtatPassagerChaine {
      */
   }
 
+
   /**
    * Le passager est-il à l'extérieur du transport ?
    *
    * @return vrai si instanciation avec DEHORS;
    */
   public boolean estExterieur() {
-	  
-	 return monEtat == Etat.DEHORS;
+    return  monEtat == Etat.DEHORS;
   }
 
   /**
@@ -46,7 +46,7 @@ public class EtatPassagerChaine {
    * @return vrai si instanciation avec ASSIS;
    */
   public boolean estAssis() {
-    return monEtat == Etat.ASSIS;
+    return monEtat 	== Etat.ASSIS;
   }
 
   /**
@@ -55,7 +55,7 @@ public class EtatPassagerChaine {
    * @return vrai si instanciation avec DEBOUT;
    */
   public boolean estDebout() {
-	  return monEtat == Etat.DEBOUT;
+    return monEtat == Etat.DEBOUT;
   }
 
   /**
@@ -64,7 +64,7 @@ public class EtatPassagerChaine {
    * @return vrai si instanciation avec ASSIS ou DEBOUT.
    */
   public boolean estInterieur() {
-	  return monEtat == Etat.ASSIS || Etat.DEBOUT ;;
+    return monEtat == Etat.ASSIS || monEtat == Etat.DEBOUT;
   }
 
 
@@ -81,10 +81,11 @@ public class EtatPassagerChaine {
    */
   @Override
   public String toString() {
-	  String s;
-	  if( monEtat == Etat.DEHORS) s= "dehors";
-	  else if()monEtat == Etat.ASSIS) s="assis";
-	  else s="debous"//if etta ==DEHORS s ="dehors";
-	  return "<" + monEtat + ">";}
+	String s;
+	if( monEtat == Etat.DEHORS) s= "dehors";
+	else if(monEtat == Etat.ASSIS) s="assis";
+	else s="debout";
+	//if etat ==DEHORS s ="dehors"
+    return "<" + monEtat + ">";
   }
 }
